@@ -10,4 +10,4 @@ db*
 *.pyc
 __pycache__/
 local_settings.py
-uploads/
+media/

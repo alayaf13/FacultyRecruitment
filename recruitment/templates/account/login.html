@@ -1,125 +1,206 @@
 {% load socialaccount %}
-<!DOCTYPE html>
+
+<!DOCTYPE HTML>
 {% load static %}
-<html lang="en">
+<html>
 
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" author="MightyMoin" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="viewport" author="AgilePlaya" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
 	<link rel="icon" href="{% static 'images/final_logo.png'%}">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<noscript>
 		<link rel="stylesheet" href="{% static 'assets/css/noscript.css'%}">
 	</noscript>
-	<title>LogIn | Faculty Recruitment</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Login | Faculty Recruitment | IIIT Lucknow</title>
+
+	<style>
+		#all-content{
+			display: flex;
+			justify-content: space-between;
+		}
+		#all-content header{
+			width:50%;
+		}
+		#all-content #main{
+			width:22em;
+			height:25em;
+			margin-top: 5em;
+			padding: 0.5em;
+		}
+		.yahoo:hover {
+			background-color: #54197d !important;
+		}
+		.outlook:hover {
+			background-color: #27272e !important;
+		}
+		.rediff:hover {
+			background-color: #630c0c !important;
+		}
+
+		/* style the container */
+		.container {
+			/* position: relative; */
+			border-radius: 5px;
+			background-color: #f2f2f2;
+			padding: 20px 0 30px 0;
+		}
+
+		/* style inputs and link buttons */
+		input, .btn {
+			width: 100%;
+			padding: 12px;
+			border: none;
+			border-radius: 4px;
+			margin: 5px 0;
+			opacity: 0.85;
+			display: inline-block;
+			font-size: 17px;
+			line-height: 20px;
+			text-decoration: none; /* remove underline from anchors */
+		}
+
+		@media screen and (max-width: 738px) {
+  			#all-content {
+    			text-align: -webkit-center;
+				display: block;
+  			}
+			  #all-content header{
+			    width:100%;
+				padding-top: 2em !important;
+		    }
+			#all-content #main{
+				width:60%;
+				margin-top: 0;
+		    }
+		}
+		@media screen and (max-width: 500px) {
+			#all-content #main{
+				width: 85vw;
+		    }
+		}
+
+	</style>
+
+
+
 </head>
 
-<body>
+<body class="is-preload">
 
-	<body class="is-preload">
-		<!-- Wrapper -->
-		<div id="wrapper">
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-			<!-- Header -->
-			<header id="header" class="alt">
-				<span class="logo"><img src="{% static 'images/final_logo_web_extended_lq.png' %}" alt="IIITL_Logo" /></span>
-				<h1>Indian Institute of Information Technology, Lucknow</h1>
-				<p>IIIT Lucknow, Chak Ganjaria, C. G. City, Lucknow – 226002<br />
-					Contact: <a
-						href="mailto:contact@iiitl.ac.in?subject=Faculty%20Recruitment%20Query">contact@iiitl.ac.in</a>
-					for more information.</p>
-			</header>
+	<div id="all-content">
 
-			<!-- Nav -->
-			<nav id="nav">
-				<ul>
-					<li><a href="#received">Log In / Sign Up</a></li>
-				</ul>
-			</nav>
+		<!-- Header -->
+		<header id="header" class="alt">
+			<span class="logo"><img src="{% static 'images/final_logo_web_extended_lq.png' %}" alt="" /></span>
+			<h1 style="font-size: xx-large;">Indian Institute of Information Technology, Lucknow</h1>
+			<p>IIIT Lucknow, Chak Ganjaria, C. G. City, Lucknow – 226002<br />
+				Contact: <a href="mailto:contact@iiitl.ac.in?subject=Faculty%20Recruitment%20Query">contact@iiitl.ac.in</a> for
+				more information.</p>
+		</header>
 
-			<!-- Main -->
-			<div id="main">
-				<!-- Kaam Yahan Krna hai Sbko -->
+		<!-- Main -->
+		<div id="main">
+			<section>
 
-				<section>
-
-					<div class="flex-container row">
-						<a href="{% provider_login_url 'google' %}" class="col-6 col-12-medium">
-							<div class="flex-item-left " style="display: flex; justify-content: space-between; ">
-								<img  style="vertical-align:middle; border-radius: 3px;  " src="../../static/images/google_logo2.png" width="15%" alt="Google_Logo">
-
+				<div class="row" style="padding: 1em;">
+					<br>
+					<div class="col">
+					  <a href="{% provider_login_url 'google' %}" class="col-6 col-12-small">
+						<div class="flex-item-left outlook" style="display: flex; justify-content: space-between;background-color: #666676;color: white;">
+							<img  style="vertical-align:middle; border-radius: 3px;  " src="../../static/images/outlooklogo.png" width="10%" >
+							<span style="width: 85%; font-size: larger; display: flex; align-items: center; justify-content: center;">
+								Login with Outlook
+							</span>
+						</div>
+					  </a>
+					  <a href="{% provider_login_url 'google' %}" class="col-6 col-12-small">
+						<div class="flex-item-right yahoo" style="display: flex; justify-content: space-between;background-color: #9447c9; ">
+							<img  style="vertical-align:middle; border-radius: 3px;  " src="../../static/images/yahoologo.png" width="10%" height=auto; >
+							<span style="width: 85%; font-size: larger; display: flex; align-items: center; justify-content: center; color: white;">
+								Login with Yahoo!
+							</span>
+						</div>
+						</a>
+						<br>
+						<a href="{% provider_login_url 'google' %}" class="col-6 col-12-small">
+							<div class="flex-item-left rediff" style="display: flex; justify-content: space-between;color:white;background-color: #d54b4b; ">
+								<img  style="vertical-align:middle; border-radius: 3px;  " src="../../static/images/redifflogo.png" width="10%" >
 								<span style="width: 85%; font-size: larger; display: flex; align-items: center; justify-content: center;">
+									Login with Rediff
+								</span>
+							</div>
+						</a>
+
+						<a href="{% provider_login_url 'google' %}" class="col-6 col-12-small">
+							<div class="flex-item-right" style="display: flex; justify-content: space-between; ">
+								<img  style="vertical-align:middle; border-radius: 3px;  " src="../../static/images/google_logo2.png" width="10%" height=auto; >
+								<span style="width: 85%; font-size: larger; display: flex; align-items: center; justify-content: center; color: white;">
 									Login with Google
 								</span>
-
-								
 							</div>
 						</a>
-
-						<a href="{% provider_login_url 'google' %}" class="col-6 col-12-medium">
-							<div class="flex-item-right " style="display: flex; justify-content: space-between; ">
-								<img  style="vertical-align:middle; border-radius: 3px;  " src="../../static/images/google_logo2.png" width="15%" height=auto; alt="Google_Logo">
-
-								<span style="width: 85%; font-size: larger; display: flex; align-items: center; justify-content: center; color: white;">
-									Sign Up with Google
-								</span>
-							</div>
-						</a>
-
-
-
 					</div>
+				</div>
 
-				</section>
-			</div>
+			</section>
 
-			<!-- Footer -->
-			<footer id="footer">
-				<section>
-					<h2 style="font-size: x-large;">How to Reach Us</h2>
-					<p style="font-size: smaller;">The IIIT Lucknow campus is located at Chak Ganjeria City (C.G. City,
-						Sultanpur Road), Lucknow . It is 23 km from the airport(CCSI Airport)
-						and 14 km from the main railway station (Charbagh Junction).</p>
-					<ul class="actions">
-						<li><a href="https://goo.gl/maps/NufsSCj5hg7rFvaTA" target="####" class="button small"><i
-									class="fas fa-map-marked-alt"></i><span> View Map </span></a></a></li>
-					</ul>
-				</section>
-				<section>
-					<h2 style="font-size: x-large;">Contact Details</h2>
-					<dl class="alt" style="font-size: smaller;">
-						<dt>Address</dt>
-						<dd>IIIT Lucknow &bull; Chak Ganjaria, C.G. City &bull; Lucknow &bull; Uttar Pradesh – 226002
-							&bull; India</dd>
-						<!--	<dt>Phone</dt>
-						<dd>(000) 000-0000 x 0000</dd>	-->
-						<dt>Email</dt>
-						<dd><a
-								href="mailto:contact@iiitl.ac.in?subject=Faculty%20Recruitment%20Query">contact@iiitl.ac.in</a>
-						</dd>
-					</dl>
-					<ul class="icons" style="font-size: small;">
-						<li><a href="#" class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
-						<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a>
-						</li>
-						<!--	<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>	-->
-					</ul>
-				</section>
-				<p class="copyright">&copy; 2020 <a href="https://iiitl.ac.in" target="###">IIIT Lucknow</a>.</p>
-			</footer>
+		</div>
 
-			<!-- Scripts -->
-			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
-			<script src="{% static 'assets/js/jquery.scrolly.min.js'%}"></script>
-			<script src="{% static 'assets/js/browser.min.js'%}"></script>
-			<script src="{% static 'assets/js/breakpoints.min.js'%}"></script>
-			<script src="{% static 'assets/js/util.js'%}"></script>
-			<script src="{% static 'assets/js/main.js' %}"></script>
+	</div>
 
-	</body>
+		<!-- Footer -->
+		<footer id="footer" style="padding-bottom: 1em;">
+			<section>
+				<h2 style="font-size: x-large;">How to Reach Us</h2>
+				<p style="font-size: smaller;">The IIIT Lucknow campus is located at Chak Ganjeria City (C.G. City,
+					Sultanpur Road), Lucknow . It is 23 km from the airport(CCSI Airport)
+					and 14 km from the main railway station (Charbagh Junction).</p>
+				<ul class="actions">
+					<li><a href="https://goo.gl/maps/NufsSCj5hg7rFvaTA" target="####" class="button small"><i
+								class="fas fa-map-marked-alt"></i><span> View Map </span></a></a></li>
+				</ul>
+			</section>
+			<section>
+				<h2 style="font-size: x-large;">Contact Details</h2>
+				<dl class="alt" style="font-size: smaller;">
+					<dt>Address</dt>
+					<dd>IIIT Lucknow &bull; Chak Ganjaria, C.G. City &bull; Lucknow &bull; Uttar Pradesh – 226002 &bull;
+						India</dd>
+					<dt>Email</dt>
+					<dd><a
+							href="mailto:contact@iiitl.ac.in?subject=Faculty%20Recruitment%20Query">contact@iiitl.ac.in</a>
+					</dd>
+				</dl>
+				<ul class="icons" style="font-size: small;">
+                    <li><a href="https://www.linkedin.com/school/iiitl/" target="#4"
+                            class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
+                    <li><a href="https://twitter.com/iiitlucknow" target="#5" class="icon brands fa-twitter alt"><span
+                                class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/iiitlucknow/" target="#6"
+                            class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+                    <!--	<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>	-->
+                </ul>
+			</section>
+			<!-- <p class="copyright" style="margin:0;">&copy; 2020 <a href="https://iiitl.ac.in" target="###">IIIT Lucknow</a>.</p> -->
+			<p class="copyright">© Copyright 2021 - <a href="https://iiitl-dev.github.io/ResearchGroup/" target="blank" style="font-weight:500;" >Data Analytics Research Lab</a>, <a href="https://iiitl.ac.in" target="blank" style="font-weight:500;" >IIIT Lucknow</a> All Rights Reserved.</p>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.scrolly.min.js'%}"></script>
+	<script src="{% static 'assets/js/browser.min.js'%}"></script>
+	<script src="{% static 'assets/js/breakpoints.min.js'%}"></script>
+	<script src="{% static 'assets/js/util.js'%}"></script>
+	<script src="{% static 'assets/js/main.js' %}"></script>
+
 </body>
+
 </html>

@@ -2161,7 +2161,12 @@ input[type='radio']:focus + label:before {
     font-size: 4.75rem;
   }
 }
-
+@media screen and (min-width: 900px) {
+  div.text-box {
+    width: 70%;
+    padding-left: 30%;
+  }
+}
 @media screen and (max-width: 736px) {
   .icon.major {
     margin: 0 0 1.5em 0;
@@ -2822,6 +2827,7 @@ table.alt tbody tr td {
 .spotlight .image {
   display: inline-block;
   padding: 0.65em;
+  margin-top: 5em;
   border-radius: 100%;
   border: solid 1px;
 }
@@ -2876,6 +2882,7 @@ span.selec.icon {
 @media screen and (max-width: 736px) {
   .spotlight .image {
     padding: 0.35em;
+    margin-top: 1em;
   }
   .spotlight .image img {
     width: 12em;
@@ -3664,6 +3671,7 @@ select:disabled {
 }
 
 .flex-container {
+  margin-top: 3.5rem;
   display: flex;
   flex-direction: row;
   font-size: 30px;
@@ -3679,7 +3687,7 @@ select:disabled {
   flex: 50%;
   border-radius: 5px;
   margin: 2%;
-  margin-bottom: 2%;
+  margin-bottom: 5%;
 }
 
 .flex-item-right {
@@ -3710,8 +3718,8 @@ html {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #32c0ca;
-  opacity: 0.75;
+  background-color: #575657;
+  opacity: 0.85;
   overflow-y: hidden;
   transition: 0.5s;
   z-index: 5;
@@ -3797,9 +3805,6 @@ html {
 /* Responsive layout - makes a one column-layout instead of two-column layout */
 
 @media (max-width: 800px) {
-  .flex-container {
-    flex-direction: column;
-  }
   a {
     font-size: large;
   }
@@ -3826,4 +3831,155 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#admin-tbody td{
+  vertical-align: middle;
+}
+
+.paginationjs{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.paginationjs-pages{
+  width: 100%;
+}
+.paginationjs-pages .active{
+  background-color: #e9e9e9;
+}
+.paginationjs-pages ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.paginationjs-pages ul li {
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  border-radius: 0.3em;
+}
+.paginationjs-go-input{
+  width: 100%;
+  max-width: 5rem;
+  margin-right: 1rem;
+}
+.paginationjs-go-input input{
+  text-align: center;
+}
+.paginationjs-go-button{
+  width: 100%;
+  max-width: 5rem;
+  margin-left: 1rem;
+}
+.J-paginationjs-go-button{
+  min-width: fit-content;
+}
+.asterisk{
+  color:rgb(200, 0, 0);
+}
+.csv-icon{
+  height: 3rem;
+}
+.csv-cont:hover::after{
+  animation: .4s moveleft ease;
+  opacity: 1;
+}
+.csv-cont{
+  display: flex;
+  align-items: center;
+  margin-bottom: .6rem;
+}
+.csv-cont::after{
+  content: "Export All";
+  color: #005F9A;
+  display: inline-block;
+  vertical-align: top;
+  padding-left: .5rem;
+  opacity: 0;
+}
+
+@keyframes moveleft {
+  0%{
+    opacity: 0;
+    transform: translate(-40px);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
+
+.supp-doc{
+  padding-top: 0.7rem;
+}
+.size-limit{
+  font-size: x-small;
+  display: block;
+  color:rgb(210, 0, 0);
+}
+.document-format{
+  font-size: x-small;
+  display: block;
+  color:rgb(210, 0, 0);
+}
+.image-upload-size{
+  color:rgb(210, 0, 0);
+  font-size: 0.8em;
+}
+
+/* Typewriter Effect CSS */
+.typewriter {
+  padding-top: 5em;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+}
+.image_advertisement{
+  margin-top: 5em;
+}
+.alert{
+  font-size: larger;
+  font-weight: 800;
+  height: fit-content;
+}
+/* DEMO-SPECIFIC STYLES */
+.typewriter div {
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation:
+  typing 3.5s steps(30, end),
+  blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+@media screen and (max-width: 650px) {
+  .alert{
+    font-size: 100%;
+    letter-spacing: 0 !important;
+  }
+  .typewriter{
+    padding: 0;
+  }
+  .image_advertisement{
+    margin-top: 2em;
+  }
+}
+@media screen and (max-width: 450px) {
+  .alert{
+    font-size: 80%;
+  }
 }

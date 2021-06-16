@@ -15,9 +15,9 @@
 </head>
 
 <body>
-
 	<body class="is-preload">
 		<!-- Wrapper -->
+		{% if user.is_superuser == 1 %}
 		<div id="wrapper">
 
 			<!-- Header -->
@@ -41,7 +41,17 @@
 
 			<!-- Main -->
 			<div id="main">
-
+				<div id="totalData" hidden>
+					{% for item in data.allData %}
+					<div>
+						<p>{{item.application_no}}</p>
+						<p>{{item.applicant_name}}</p>
+						<p>{{item.applied_post}}</p>
+						<p>{{item.applied_date}}</p>
+						<p>{{item.applied_department}}</p>
+					</div>
+					{% endfor %}
+				</div>
 				<!-- Filter Applications Sections -->
 				<section id="filter" class="main">
 					<div class="spotlight">
@@ -51,38 +61,35 @@
 							</header>
 							<!-- Add dropdowns here -->
 							<div class="container">
-							  <div class="row gtr-uniform">
-
-								<div class="col-3 col-5-medium">
-									Advertisement Number
-								</div>
-								<div class="col-3 col-6-medium">
-									<select name="adv_num" id="adv_num">
-										<option value="1">Dropdown</option>
-										<option value="1">1</option>
-										<option value="1">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-									</select>
-								</div>
-								<div class="col-1 col-0-medium"></div>
-								<div class="col-2 col-5-medium">
-									Applied For:
-								</div>
-								<div class="col-3 col-6-medium">
-									<select name="App_for" id="App_for">
-										<option value="1">Dropdown</option>
-										<option value="1">1</option>
-										<option value="1">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-									</select>
-								</div>
+								<div class="row gtr-uniform">
+									<div class="col-3 col-5-medium">
+										Application number:
+									</div>
+									<div class="col-3 col-6-medium">
+										<input type="text" id="App_no" value="">
+									</div>
+									<div class="col-1"></div>
+									<div class="col-2 col-5-medium">
+										Applied For:
+									</div>
+									<div class="col-3 col-6-medium">
+										<select name="App_for" id="App_for">
+											<option value="" selected> - None - </option>
+											<option value="Professor">Professor</option>
+											<option value="Associate Professor">Associate Professor</option>
+											<option value="Assistant Professor Grade 2 Level 10">Assistant
+												Professor Grade 2 Level 10</option>
+											<option value="Assistant Professor Grade 2 Level 11">Assistant
+												Professor Grade 2 Level 11</option>
+											<option value="Assistant Professor Grade 1 Level 12">Assistant
+												Professor Grade 1 Level 12</option>
+										</select>
+									</div>
 									<div class="col-3 col-5-medium">
 										Applicant Date After:
 									</div>
 									<div class="col-3 col-6-medium">
-										<input type="date" name="datechk" class="datechk">
+										<input id="date_after" type="date" name="datechk" class="datechk" value=''>
 									</div>
 									<div class="col-1"></div>
 
@@ -90,27 +97,29 @@
 										Before:
 									</div>
 									<div class="col-3 col-6-medium">
-										<input type="date" name="datechk" class="datechk">
+										<input id="date_before" type="date" name="datechk" class="datechk" value=''>
 									</div>
 
-										<div class="col-3 col-5-medium">
-											Subject Selected
-										</div>
-										<div class="col-3 col-6-medium">
-											<select name="sub_selected" id="sub_selected">
-												<option value="1">Dropdown</option>
-												<option value="1">1</option>
-												<option value="1">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-											</select>
-										</div>
+									<div class="col-3 col-5-medium">
+										Subject Proficiency
+									</div>
+									<div class="col-3 col-6-medium">
+										<select name="sub_selected" id="sub_selected">
+											<option value="" selected> - None - </option>
+											<option value="CSE-IT">CSE / IT</option>
+											<option value="Mathematics">Mathematics</option>
+											<option value="Management & Humanities">Management & Humanities
+											</option>
+										</select>
+									</div>
 
-							  </div>
+								</div>
 
 							</div>
-								<center><input type="button" value="Submit" style="background-color:rgb(130, 196, 240); margin-top: 6vh;"></center>
-					   </div>
+							<center><button type="button" value=""
+									style="background-color:rgb(130, 196, 240); color : white !important;margin-top: 6vh;"
+									onclick="filterData()">Submit</button></center>
+						</div>
 					</div>
 				</section>
 
@@ -121,34 +130,39 @@
 							<header class="major headLeft">
 								<h2>Applications Received:</h2>
 							</header>
+							<div class="col-12" style="display:flex;justify-content:flex-end;align-items: center;">
+								<a class="csv-cont" href="{% url 'export-csv' %}"">
+									<img class="csv-icon" src="{% static 'images/csvImage.svg' %}" alt="" srcset="" />
+								</a>
+							</div>
 							<!-- Add tables here -->
 							<div class="table-wrapper" style="padding: 2px;">
-								<table class="rounded" style="text-align-last: center;border:1.5px solid #a6a6a6;border-collapse: separate;border-radius: 1rem 1rem 0 0;">
-								<thead
-									id="app-thead">
-										<td style="border-top-left-radius: 1rem; border-bottom: 1px solid #a6a6a6;" scope="col">Application Number</td>
-										<td scope="col" style=" border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6">Applicant Name</td>
-										<td scope="col" style=" border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6">Applied for Position</td>
-										<td scope="col" style=" border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6">Application Date</td>
-										<td style="border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6 " scope="col">Subject Proficiency</td>
-										<td style="border-top-right-radius: 1rem;border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6 " scope="col">View More</td>
-								</thead>
-								
-								<tbody class="application-row">
-									<tr></tr>
-									{% for item in data.allData %}
-										<tr>
-											<td>{{item.application_no}}</td>
-											<td>{{item.applicant_name}}</td>
-											<td>{{item.applied_post}}</td>
-											<td>{{item.applied_date}}</td>
-											<td>{{item.applied_department}}</td>
-											<td> <a href='/admin/user/{{item.application_no}}'>Go-> </a> </td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
+								<table class="rounded"
+									style="text-align-last: center;border:1.5px solid #a6a6a6;border-collapse: separate;border-radius: 1rem 1rem 0 0;">
+									<thead id="app-thead">
+										<td style="border-top-left-radius: 1rem; border-bottom: 1px solid #a6a6a6;"
+											scope="col">Application Number</td>
+										<td scope="col"
+											style=" border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6">
+											Applicant Name</td>
+										<td scope="col"
+											style=" border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6">
+											Applied for Position</td>
+										<td scope="col"
+											style=" border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6">
+											Application Date</td>
+										<td style="border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6 "
+											scope="col">Subject Proficiency</td>
+										<td style="border-top-right-radius: 1rem;border-bottom: 1px solid #a6a6a6;border-left: 1px solid #a6a6a6 "
+											scope="col">View More</td>
+									</thead>
+
+									<tbody id="admin-tbody" class="application-row">
+										<tr></tr>
+									</tbody>
+								</table>
 							</div>
+							<div class="pagination-cont"></div>
 						</div>
 					</div>
 				</section>
@@ -180,15 +194,17 @@
 						</dd>
 					</dl>
 					<ul class="icons" style="font-size: small;">
-						<li><a href="#" class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
-						<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a>
-						</li>
-						<!--	<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>	-->
+						<li><a href="https://www.linkedin.com/school/iiitl/" target="#4"
+								class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://twitter.com/iiitlucknow" target="#5" class="icon brands fa-twitter alt"><span
+									class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com/iiitlucknow/" target="#6"
+								class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+						<!--	<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>	-->
 					</ul>
 				</section>
-				<p class="copyright">&copy; 2020 <a href="https://iiitl.ac.in" target="###">IIIT Lucknow</a>.</p>
+				<!-- <p class="copyright">&copy; 2020 <a href="https://iiitl.ac.in" target="###">IIIT Lucknow</a>.</p> -->
+				<p class="copyright">© Copyright 2021 - <a href="https://iiitl-dev.github.io/ResearchGroup/" target="blank" style="font-weight:500;" >Data Analytics Research Lab</a>, <a href="https://iiitl.ac.in" target="blank" style="font-weight:500;" >IIIT Lucknow</a> All Rights Reserved.</p>
 			</footer>
 
 			<!-- Scripts -->
@@ -197,15 +213,101 @@
 			<script src="{% static 'assets/js/jquery.scrolly.min.js'%}"></script>
 			<script src="{% static 'assets/js/browser.min.js'%}"></script>
 			<script src="{% static 'assets/js/breakpoints.min.js'%}"></script>
+			<script src="{% static 'assets/js/pagination.min.js' %}"></script>
 			<script src="{% static 'assets/js/util.js'%}"></script>
 			<script src="{% static 'assets/js/main.js' %}"></script>
+			<script>
+				var fullData = []
+				var allData = document.querySelectorAll('#totalData div');
+				// console.log(allData);
+				allData.forEach(i => {
+					var presData = []
+					Array.from(i.children).forEach(j => {
+						presData.push(j.textContent);
+					});
+					fullData.push(presData)
+				});
+				console.log(fullData);
+				function myTemplate(data){
+					var finalData = '';
+					data.forEach((item , i) => {
+						finalData += `<tr>
+							<td>${item[0]}</td>
+							<td>${item[1]}</td>
+							<td>${item[2]}</td>
+							<td>${item[3]}</td>
+							<td>${item[4]}</td>
+							<td> <a href='/admin/user/${item[0]}'> <i
+										class="fas fa-arrow-right" style="color: cornflowerblue;"></i>
+								</a> </td>
+										</tr>`;
+					});
+					console.log(finalData);
+					return finalData;
+				}
+				function appendData(apno, apname, pos, afterDate, beforeDate, sub) {
+					var presDate = new Date();
+					var miniDate = new Date(2010, 01, 01);
 
+					var mybody = document.querySelector('#admin-tbody');
+					var presData = []
+					fullData.forEach(item => {
+						var tempDate = new Date(item[3]);
+						var afd = new Date(afterDate).getTime();
+						var bed = new Date(beforeDate).getTime();
+						var abc=false;
+						var abc2=false;
+						if(tempDate.getTime()>=afd){
+						abc=true;
+						}
+						if(tempDate.getTime()<=bed){
+						abc2=true;
+						}
+						if ((apno === '' || apno === item[0]) && (apname === '' || apname === item[1]) && (pos === '' || pos === item[2]) && (afterDate == 'Invalid Date' || abc) && (beforeDate == 'Invalid Date' || abc2) && (sub === '' || sub === item[4])) {
+							presData.push(item);
+						}
+					});
+					console.log("presData ==> " , presData);
+					var dataContainer = $('#admin-tbody');
+					$('.pagination-cont').pagination({
+						dataSource: presData,
+						pageSize: 10,
+						showGoInput: true,
+						showGoButton: true,
+						position: 'bottom',
+						callback: function(data, pagination) {
+							var html = myTemplate(data);
+							dataContainer.html(html);
+						}
+						})
+				}
+				appendData('', '', '', 'Invalid Date', 'Invalid Date', '');
+				function filterData() {
+					var appFor = $('#App_for').val();
+					var appNum = $('#App_no').val();
+					if($('#date_after').val()===''){
+						var dateAfter = new Date( $('#date_after').val());
+					}
+					else{
+					var dateAfter = new Date( `${$('#date_after').val()} 00:00:00`);}
+					if($('#date_before').val()===''){
+						var dateBefore = new Date( $('#date_before').val());
+					}
+					else{
+					var dateBefore = new Date(`${$('#date_before').val()} 00:00:00`);}
+					var subSelected = $('#sub_selected').val();
+					console.log(subSelected);
+					var mybody = document.querySelectorAll('#admin-tbody tr');
+					var se = mybody.length;
+					for (var zz = 1; zz < se; zz++) mybody[zz].remove();
+					appendData(appNum, '', appFor, dateAfter, dateBefore, subSelected);
+					$([document.documentElement, document.body]).animate({
+						scrollTop: $("#received").offset().top
+					}, 700);
+				}
+			</script>
 	</body>
-</body>
-
-
-<style>
-
-</style>
-
+	{% endif %}
+	<p class="copyright">© Copyright 2021 - Data Analytics Research Lab, IIIT Lucknow.<a href="https://iiitl.ac.in" target="###">IIIT Lucknow</a> All Rights Reserved.</p>
+		
 </html>

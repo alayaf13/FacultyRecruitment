@@ -2,8 +2,13 @@ from django.db import models
 from django.conf import settings 
 from django.utils import timezone
 
+def handle_uploaded_file(instance,filename):
+    directory = f'{instance.application_no}/{filename}'
+    return directory
 
-
+def handle_uploaded(instance,filename):
+    directory = f'{instance.applicant_id}/{filename}'
+    return directory
 class Applicant(models.Model):
     ''' Model for applicants personal data '''
     application_no = models.CharField(primary_key=True, max_length=20)
@@ -12,17 +17,17 @@ class Applicant(models.Model):
     post = models.CharField(max_length=100)
     department = models.CharField(max_length=20)
     Research_Domain=models.TextField(default=None)
-    profile_picture = models.FileField(upload_to='uploads/', null=True, blank=True)
+    profile_picture = models.FileField(upload_to=handle_uploaded_file, null=True, blank=True)
     
     def __str__(self):
         return str(self.application_no)
 
 class ResearchExp(models.Model):
     '''Model for the research experience of the applicant''' 
-    From = models.DateField()
-    to = models.DateField(max_length=20)
+    From = models.CharField(max_length=20)
+    to = models.CharField(max_length=20)
     number_of_months = models.TextField()
-    supporting_documents = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    supporting_documents = models.ImageField(upload_to=handle_uploaded, null=True, blank=True)
     applicant = models.ForeignKey(Applicant, 
                                 on_delete=models.CASCADE,
                                 related_name='research_exp',
@@ -35,11 +40,11 @@ class SeminarArticles(models.Model):
     article_title = models.TextField()
     seminar_subject = models.TextField()
     location = models.CharField(max_length=100)
-    From = models.DateField()
-    to = models.DateField()
+    From = models.CharField(max_length=20)
+    to = models.CharField(max_length=20)
     published = models.TextField()
-    supporting_documents = models.ImageField(upload_to='uploads/', null=True, blank=True)
-    applicant = models.ForeignKey(Applicant, 
+    supporting_documents = models.ImageField(upload_to=handle_uploaded, null=True, blank=True)
+    applicant = models.ForeignKey(Applicant,
                                 on_delete=models.CASCADE,
                                 related_name='seminararticles',
                 )
@@ -51,11 +56,11 @@ class NewspaperArticle(models.Model):
     article_title = models.TextField()
     journal_name = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
-    date_published = models.DateField()
+    date_published = models.CharField(max_length=20)
     vol_no = models.TextField()
     referred = models.TextField()
     naas = models.TextField()
-    supporting_documents = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    supporting_documents = models.ImageField(upload_to=handle_uploaded, null=True, blank=True)
     applicant = models.ForeignKey(Applicant, 
                                 on_delete=models.CASCADE,
                                 related_name='newspaper_article',
@@ -67,9 +72,9 @@ class Books(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
-    date_publish = models.DateField()
+    date_publish = models.CharField(max_length=20)
     isbn= models.TextField()
-    supporting_documents = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    supporting_documents = models.ImageField(upload_to=handle_uploaded, null=True, blank=True)
     applicant = models.ForeignKey(Applicant, 
                                 on_delete=models.CASCADE,
                                 related_name='books',
@@ -82,9 +87,9 @@ class Chapters(models.Model):
     chapter = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
-    date_of_publisher = models.DateField()
+    date_of_publisher = models.CharField(max_length=20)
     isbn_issn = models.TextField()
-    supporting_documents = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    supporting_documents = models.ImageField(upload_to=handle_uploaded, null=True, blank=True)
     applicant = models.ForeignKey(Applicant, 
                                 on_delete=models.CASCADE,
                                 related_name='applicant',
@@ -95,12 +100,14 @@ class Chapters(models.Model):
 class EducationalQualifications(models.Model):
     ''' Model for educational qualifications of applicant.'''
     degree = models.CharField(max_length=200)
+    equivalent_to = models.CharField(max_length=200, default=None)
     name = models.CharField(max_length=200)
     marks = models.CharField(max_length=10)
+    obtained = models.CharField(max_length=10)
     subjects = models.CharField(max_length=200)
     year_of_passing = models.IntegerField()
-    supporting_documents = models.FileField(upload_to='uploads/', null=True, blank=True)
-    applicant = models.ForeignKey(Applicant, 
+    supporting_documents = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
+    applicant = models.ForeignKey(Applicant,
                                 on_delete=models.CASCADE,
                                 related_name='Educational_qualifications',
                 )
@@ -112,11 +119,11 @@ class EmploymentExp(models.Model):
     '''Model for Employment experience of applicant'''
     name = models.CharField(max_length=200)
     post = models.CharField(max_length=250)
-    from_year = models.DateField()
-    to_year = models.DateField()
+    from_year = models.CharField(max_length=20)
+    to_year = models.CharField(max_length=20)
     salary = models.TextField()
     nature = models.CharField(max_length=200)
-    supporting_documents = models.FileField(upload_to='uploads/', null=True, blank=True)
+    supporting_documents = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
     applicant = models.ForeignKey(Applicant, 
                                 on_delete=models.CASCADE,
                                 related_name='Employment_exp',
@@ -139,13 +146,13 @@ class General(models.Model):
     mobile_number = models.CharField(max_length=15)
     email = models.EmailField(max_length=50)
     gender = models.CharField(max_length=20)
-    marital_status = models.CharField(max_length = 10,choices = (
+    marital_status = models.CharField(max_length = 11,choices = (
                                                         ("Married", "Married"),
                                                         ("Not Married", "Not Married"),
                                                         ))
     nationality = models.CharField(max_length=20)
     state = models.CharField(max_length=50)
-    category = models.CharField(max_length = 10,choices = (
+    category = models.CharField(max_length = 11,choices = (
                                                         ("General", "General"),
                                                         ("OBC-CL", "OBC-CL"),
                                                         ("OBC-NCL", "OBC-NCL"),
@@ -161,8 +168,7 @@ class General(models.Model):
                                                         ("Yes", "Yes"),
                                                         ("No", "No"),
                                                         ))
-    reservation_certificate = models.ImageField(upload_to='uploads/', null=True, blank=True)
-    present_employer = models.CharField(max_length=200)
+    reservation_certificate = models.ImageField(upload_to=handle_uploaded, null=True, blank=True)
     applicant = models.ForeignKey(Applicant, 
                                 on_delete=models.CASCADE,
                                 related_name='General',
@@ -176,17 +182,56 @@ class PhD(models.Model):
                                                         ("Yes", "Yes"),
                                                         ("No", "No"),
                                                         ))
-    title_of_thesis = models.CharField(max_length=500)
+    PhD_details = models.CharField(max_length=11,choices = (
+                                                        ("Ongoing", "Ongoing"),
+                                                        ("Submitted", "Submitted"),
+                                                        ("Awarded", "Awarded"),
+    ))
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, related_name='PhD')
     def __str__(self):
         return str(self.applicant)   
 
+class PhDOngoing(models.Model):
+    PhD_title = models.CharField(max_length=200)
+    Research_Domain = models.CharField(max_length=200)
+    Institute_Name = models.CharField(max_length=200)
+    University_Name = models.CharField(max_length=200)
+    Registration_Date = models.CharField(max_length=200)
+    supporting_documents = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, related_name='PhDOngoing')
+    def __str__(self):
+        return str(self.applicant)   
+
+class ThesisSubmitted(models.Model):
+    PhD_title = models.CharField(max_length=200)    
+    Research_Domain = models.CharField(max_length=200)
+    Institute_Name = models.CharField(max_length=200)
+    University_Name = models.CharField(max_length=200)
+    Registration_Date = models.CharField(max_length=200)
+    Submission_Date = models.CharField(max_length=200)
+    supporting_documents = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, related_name='ThesisSubmitted')
+    def __str__(self):
+        return str(self.applicant)   
+
+class PhDAwarded(models.Model):
+    PhD_title = models.CharField(max_length=200)    
+    Research_Domain = models.CharField(max_length=200)
+    Institute_Name = models.CharField(max_length=200)
+    University_Name = models.CharField(max_length=200)
+    Registration_Date = models.CharField(max_length=200)
+    Defense_Date = models.CharField(max_length=200)
+    supporting_documents = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, related_name='PhDAwarded')
+    def __str__(self):
+        return str(self.applicant)   
+    
 class OtherInfo(models.Model):
     membership = models.TextField()
     responsibilities = models.TextField()
     Any_other_relevant_information = models.TextField()
     academic_year_break = models.TextField()
-    college_punishment = models.TextField()
+    awards_and_recognition = models.TextField(default=None)
     judicial_punishment = models.TextField()
     unfit_for_position = models.TextField()
     reference1 = models.TextField()
@@ -199,7 +244,7 @@ class SponsoredProject(models.Model):
     spo_tot_number = models.CharField(max_length=10)
     spo_ongoing = models.TextField()
     spo_completed = models.TextField()
-    spo_file = models.FileField(upload_to='uploads/', null=True, blank=True)
+    spo_file = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, related_name='sponsored_project')
     def __str__(self):
         return str(self.applicant)    
@@ -208,7 +253,7 @@ class Experiments(models.Model):
     exp_tot_number = models.CharField(max_length=10)
     exp_ongoing = models.TextField()
     exp_completed = models.TextField()
-    exp_file = models.FileField(upload_to='uploads/', null=True, blank=True)
+    exp_file = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, related_name='Experiments')
     def __str__(self):
         return str(self.applicant)
@@ -225,7 +270,7 @@ class AdministrativeDetails(models.Model):
         return str(self.applicant)
 
 class Summary(models.Model):
-    defence_date = models.DateField()
+    defence_date = models.CharField(max_length=200)
     total_exp = models.CharField(max_length=10)
     exp_post_phd = models.TextField()
     total_phd_students = models.CharField(max_length=20)
@@ -248,7 +293,9 @@ class Patent(models.Model):
 class Declaration(models.Model):
     place = models.TextField()
     date = models.CharField(max_length=20)
-    signature = models.FileField(upload_to='uploads/', null=True, blank=True)
+    signature = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
+    resume = models.FileField(upload_to=handle_uploaded, null=False, blank=False)
+    receipt = models.FileField(upload_to=handle_uploaded, null=False, blank=False)
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, related_name='declaration')
     def __str__(self):
         return str(self.applicant)
@@ -256,6 +303,6 @@ class Declaration(models.Model):
 
 # class File(models.Model):
 #     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, related_name='files')
-#     publications = models.FileField(upload_to='uploads/', null=True, blank=True)
-#     image = models.ImageField(upload_to='uploads/', null=True, blank=True)
-    # caste_certificate = models.FileField(upload_to='uploads/', null=True, blank=True)
+#     publications = models.FileField(upload_to=handle_uploaded, null=True, blank=True)
+#     image = models.ImageField(upload_to=handle_uploaded, null=True, blank=True)
+    # caste_certificate = models.FileField(upload_to=handle_uploaded, null=True, blank=True)

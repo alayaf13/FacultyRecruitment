@@ -20,6 +20,9 @@
 	<!-- Wrapper -->
 	<div id="wrapper">
 
+		 <!-- hamburger- for mobile view -->
+		 <span class="menu_btn" onclick="openNav()">&#9776;</span>
+
 		<!-- Header -->
 		<header id="header" class="alt">
 			<span class="logo"><img src="{% static 'images/final_logo_web_extended_lq.png' %}" alt="" /></span>
@@ -41,6 +44,18 @@
 			</ul>
 		</nav>
 
+		        <!-- Mobile Nav Bar -->
+				<div id="myNav" class=" nav overlay col-0 col-12-medium">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+					<div class="overlay-content">
+						<div><a href="#advert" onclick="closeNav()">Advertisement</a></div>
+						<div><a href="#spec" onclick="closeNav()">Area of Specialization</a></div>
+						<div><a href="#selec" onclick="closeNav()">Selection Procedure</a></div>
+						<div><a href="{% provider_login_url 'google' %}" onclick="closeNav()">Login</a></div>
+					</div>
+				</div>
+				<!-- Mobile Nav Ends here -->
+
 		<!-- Main -->
 		<div id="main">
 
@@ -48,25 +63,25 @@
 			<section id="advert" class="main">
 				<div class="spotlight">
 					<div class="content">
-						<header class="major">
+						<header class="major special">
 							<h2>Advertisement Number:</h2>
 						</header>
 						<p> The Institute invites the applications from meritorious and highly qualified Indian
-							nationals (including the Persons of Indian Origin
-							(PIOs) and Overseas Citizens of India (OCIs)) from Engineering/Science and Technology
+							nationals [including the Persons of Indian Origin
+							(PIOs) and Overseas Citizens of India (OCIs)] from Engineering/Science and Technology
 							background, for the following positions in the
 							Departments of Information Technology and Computer Science. For SC/ST/OBC(NCL)/EWS/PwD GOI
 							guidelines shall apply.<br> Candidates who have applied for the post
 							of Professor against the advertisement IIITL/Recruitment/2019 need not to apply. However,
 							updated CV’s may be sent to rectt.faculty@iiitl.ac.in.
-							Roster as per Govenment of India is given in the pdf below:
+							Roster as per government of India is given in the pdf below:
 						</p>
 						<ul class="actions">
 							<li><a href="{% static 'assets/downloads/Rolling_Advertisement_Contract.pdf'%}" target="##"
 									class="button">Download Full PDF</a></li>
 						</ul>
 					</div>
-					<a href="{% static 'assets/downloads/Newspaper_Advertisement.pdf'%}" target="#"><span
+					<a href="{%static 'images/NewspaperAdvertisementWeb.jpg'%}" target="#"><span
 							class="image"><img src="{%static 'images/NewspaperAdvertisementWeb.jpg'%}"
 								alt="" /></span></a>
 				</div>
@@ -113,7 +128,7 @@
 			<section id="selec" class="main alt">
 				<div class="spotlight">
 					<div class="content">
-						<header class="major">
+						<header class="major special">
 							<h2>Selection Procedure:</h2>
 						</header>
 						<p>
@@ -134,161 +149,6 @@
 				</div>
 			</section>
 
-			<!-- Guidelines section -->
-			<section id="guide" class="main alt">
-				<div class="spotlight">
-					<div class="content">
-						<header class="major">
-							<h2>Guidelines:</h2>
-						</header>
-						<p>
-						<ol style="text-align: justify;">
-							<li><strong>Only</strong> applications received through the <strong>ONLINE APPLICATION
-									PORTAL</strong>, will be
-								considered.<br></li>
-							<br>
-							<li>Candidates applying for more than one post/department have to submit separate complete
-								applications.</li>
-							<br>
-							<li>For each of the qualifications, professional experiences, achievements, etc.,
-								documentary proof in the form of self-attested
-								photo-copies is to be produced, if called for interview.<br></li>
-							<br>
-							<li>The originals must be produced at the time of interview and at the time of joining.</li>
-							<br>
-							<li>Consistently good academic background with all requirements for any category of post
-								applied, as per guidelines of MHRD
-								letter no. F.No.27-11/2011- TS.I, dated 23/04/2014.<br></li>
-							<br>
-							<li>Incomplete applications / applications without necessary enclosures may not be
-								accepted.<br></li>
-							<br>
-							<li>Copy of the category certificate (OBC / SC / ST/ PwD), issued by the competent
-								authority,
-								not below the rank of a Tahsildar, and must be attached. In case of OBC candidates, the
-								certificate indicating the status regarding creamy layer must be issued on or after
-								01/01/2019.
-								PWD certificate must have been issued by the competent authority as per Government of
-								India
-								norms.<br></li>
-							<br>
-							<li>The vacancies advertised under EWS Category is as per the instructions issued by DoPT,
-								Ministry of Personnel, Public Grievances & Pension, Govt. of India, vide OM. No.
-								36039/1/2019-Estt (Res), dated 31.01.2019. EWS vacancies are tentative and subject to
-								further
-								directives of Gol and outcome of any litigation. The appointment against EWS category
-								shall
-								be provisional and is subject to the Income and Asset certificate being verified through
-								the
-								proper channels and if the verification reveals that the claim of belonging to EWS is
-								fake/false,
-								the services will be terminated forthwith without assigning any further reasons and
-								without
-								prejudice to such further action as may be taken under the provisions of the Indian
-								Penal Code
-								for production of fake/false certificate. The Income and Asset Certificate issued by any
-								of the
-								authorities mentioned in the prescribed format shall only be accepted as proof of
-								candidate’s
-								claim as belonging to EWS.<br></li>
-							<br>
-							<li>The eligibility, qualification, experience and requirements for the posts notified shall
-								be
-								governed by the guidelines issued by MHRD letter no. F.No.27-11/2011- TS.I, dated
-								23/04/2014.<br></li>
-							<br>
-							<li>The vacancies advertised are indicative and subject to variation at the time of
-								interview
-								/ recruitment. The Institute reserves the right to fill or not to fill any of the
-								vacancies advertised.
-								The Institute reserves the right to reject any or all applications without assigning any
-								reason.<br></li>
-							<br>
-							<li>Any misleading wrong information supplied by the candidates may lead to summarily
-								rejection
-								of the application, if found subsequently, also the appointment will be cancelled.<br>
-							</li>
-							<br>
-							<li>The Screening committee shall short-list the eligible and desirable candidates, to be
-								called for
-								interview from amongst the applicants, based on specialization, availability of
-								candidates, and
-								requirements of the departments. In doing so it shall not be bound by the options
-								exercised by
-								the applicants.<br></li>
-							<br>
-							<li>Mere fulfilment of minimum qualification and experience requirements for the post does
-								not
-								entitle the candidate to be called for an interview. The Institute reserves the right to
-								restrict
-								the number of candidates for interview to reasonable limit, on the basis of
-								qualification and
-								experience higher than those prescribed in this advertisement.<br></li>
-							<br>
-							<li>No interim queries regarding interview / selection process will be entertained.<br></li>
-							<br>
-							<li>Canvassing in any form will lead to rejection of application form.<br></li>
-							<br>
-							<li>Decision of the Selection Committee and the Board of Governors of IIIT Lucknow with
-								respect
-								to the selection process is final.<br></li>
-							<br>
-							<li>Legal disputes, if any with IIIT Lucknow are restricted to the jurisdiction of Lucknow
-								Court
-								only.<br></li>
-							<br>
-							<li>The maximum age limit will be considered on the last date of receipt of applications.
-								The
-								relaxation 05 years for SC/ST candidates and 03 years for OBC candidates with additional
-								10
-								years age relaxation to persons with disabilities will be given in accordance with the
-								Government of India Rules. Relaxation in upper age limit for those applicants, who are
-								in
-								Central Government or central Government Autonomous body, Ex-Servicemen, shall be
-								admissible as per the Government of India rules. Further, the institute may consider
-								relaxation
-								in upper age limit in case of highly experienced and deserving candidate.<br></li>
-							<br>
-							<li>Person employed in Govt./Semi-Govt./Autonomous/PSU should also apply online and sent the
-								print out of completed application form along with all the relevant supporting documents
-								and
-								transaction slip with date, duly self-attested, THROUGH PROPER CHANNEL. However, an
-								advance copy, super scribed as “Advance Copy” on the application form, may be submitted
-								before the last date. Candidate may produce the NOC from their organization at the time
-								of
-								interview with an unambiguous certificate that (i) no vigilance case is pending/being
-								contemplated against him/her. (ii) the applicant will be relieved within one month of
-								receipt of
-								appointment offer, if he selected. List of Major/Minor penalties, if any, imposed during
-								the last
-								10 years may be asked to submit at any time. Such persons are also advised to send an
-								advance
-								copy of their application, if applicable.</li>
-						</ol>
-						</p>
-					</div>
-				</div>
-			</section>
-
-			<!-- Reservation Sections -->
-			<section id="reserve" class="main alt">
-				<div class="spotlight">
-					<div class="content">
-						<header class="major">
-							<h2>Reservation</h2>
-						</header>
-						<p style="text-align: justify;"> Reservation at entry level is applicable as per Government of
-							India rules. The candidate belonging to reserved
-							categories(SC/ST/OBC-NCL/PwD/EWS) are required to attach the Caste/ Category/Income
-							certificate issued by the competent authority in prescribed
-							format of Government of India. The Institute follows the Central list in the case of SC/ST
-							and OBC-NCLs. The institute also encourages
-							applications from qualified women candidates.
-						</p>
-					</div>
-				</div>
-			</section>
-
 			<!-- Apply Section -->
 			<section id="apply" class="main special">
 				<header class="major">
@@ -301,7 +161,6 @@
 					</ul>
 				</footer>
 			</section>
-
 		</div>
 
 		<!-- Footer -->
@@ -312,7 +171,7 @@
 					Sultanpur Road), Lucknow . It is 23 km from the airport(CCSI Airport)
 					and 14 km from the main railway station (Charbagh Junction).</p>
 				<ul class="actions">
-					<li><a href="https://goo.gl/maps/NufsSCj5hg7rFvaTA" target="####" class="button small"><i
+					<li><a href="https://goo.gl/maps/NufsSCj5hg7rFvaTA" target="blank" class="button small"><i
 								class="fas fa-map-marked-alt"></i><span> View Map </span></a></a></li>
 				</ul>
 			</section>
@@ -330,14 +189,16 @@
 					</dd>
 				</dl>
 				<ul class="icons" style="font-size: small;">
-					<li><a href="#" class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
-					<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
-					<!--	<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>	-->
-				</ul>
+                    <li><a href="https://www.linkedin.com/school/iiitl/" target="#4"
+                            class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
+                    <li><a href="https://twitter.com/iiitlucknow" target="#5" class="icon brands fa-twitter alt"><span
+                                class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/iiitlucknow/" target="#6"
+                            class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+                    <!--	<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>	-->
+                </ul>
 			</section>
-			<p class="copyright">&copy; 2020 <a href="https://iiitl.ac.in" target="###">IIIT Lucknow</a>.</p>
+			<p class="copyright">© Copyright 2021 - <a href="https://iiitl-dev.github.io/ResearchGroup/" target="blank" style="font-weight:500;" >Data Analytics Research Lab</a>, <a href="https://iiitl.ac.in" target="blank" style="font-weight:500;" >IIIT Lucknow</a> All Rights Reserved.</p>
 		</footer>
 
 	</div>

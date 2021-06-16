@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+
+<head>
+    <title>Faculty Recruitment Form | IIIT Lucknow</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" author="MightyMoin" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <link rel="icon" href="{% static 'images/final_logo.png' %}">
+    <noscript>
+        <link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- hamburger- for mobile view -->
+        <span class="menu_btn" onclick="openNav()">&#9776;</span>
+        <!-- 	Header	-->
+        <header id="header">
+            <span class="logo"><a href="https://iiitl.ac.in" target="###"><img
+                        src="{% static 'images/final_logo_web_extended_lq.png' %}" alt="" /></a></span>
+            <h1>Faculty Recruitment Form</h1>
+            <p>
+                Admin | Faculty Recruitment Portal <a href="https://iiitl.ac.in"
+                    target="###">IIIT Lucknow</a>.<br />
+            </p>
+        </header>
+        <div id="main">
+
+            <!-- Content -->
+            <section id="content" class="main" style="padding-top: 0;">
+
+                <!--	Congratulatory Message	-->
+                <div class="spotlight">
+                    <div class="content">
+                        <form action='.', method="POST" style="margin-top: 5em;">
+                            {% csrf_token %}
+                            <div class="col-12" style="padding: 20px;">
+                                <img height="100px" src="{% static 'images/adminUser.svg' %}" alt="admin logo">
+                            </div>
+                            <div style="text-align: left;">
+                                Incorrect attempts:&nbsp;&nbsp;
+                                <span>
+                                    <input id="chances" name="chances" type="number" value="{{ abc }}" style="width: 5em; display:none;" hidden readonly>  <!--  data is going to the backend-->
+                                    <input id="front" type="number" value="" style="width: 5em; display:inline-block" readonly>  <!--  for front end only -->
+                                </span>
+                            </div>
+                            <div class="text-box">
+                                <h2 style="font-weight: 900;">Admin Login</h2>
+                                <input type="text" placeholder="Username" name="Username" class="textbox"></input>
+                                <br>
+                                <input type="password" id="pass" placeholder="Password" name="Password" class="textbox"></input>
+                                <br>
+                            </div>
+                            <button id="submitform" class="button small primary" type="submit">Login</button>
+                            <script>
+                                var input = document.getElementById("pass");
+                                input.addEventListener("keyup", function(event) {
+                                  if (event.keyCode === 13) {
+                                   event.preventDefault();
+                                   document.getElementById("submitform").click();
+                                  }
+                                });
+                                </script>
+                        </form>
+                        {%if could_not_log_in %}
+                        <p class="error">Either username or password is incorrect</p>
+                        <script>
+                            var tries = document.querySelector('#chances').value
+                            tries = `${parseInt(tries) + 1}`
+                            console.log(tries);
+                        </script>
+                        {% endif %}
+
+                        {% if three %}
+                        <p class="error" style="font-weight: 500;color:crimson"> Incorrect 3 times! </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section>
+                <h2>How to Reach Us</h2>
+                <p style="font-size: smaller;">The IIIT Lucknow campus is located at Chak Ganjeria City (C.G. City,
+                    Sultanpur Road), Lucknow . It is 23 km from the airport(CCSI Airport) and 14 km from the main
+                    railway station (Charbagh Junction).</p>
+                <ul class="actions">
+                    <li><a href="https://goo.gl/maps/NufsSCj5hg7rFvaTA" target="#3" class="button small"><i
+                                class="fas fa-map-marked-alt"></i><span> View Map </span></a></a>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Contact Details</h2>
+                <dl class="alt" style="font-size: smaller;">
+                    <dt>Address</dt>
+                    <dd>IIIT Lucknow &bull; Chak Ganjaria, C.G. City &bull; Lucknow &bull; Uttar Pradesh – 226002 &bull;
+                        India
+                    </dd>
+                    <dt>Email</dt>
+                    <dd><a
+                            href="mailto:contact@iiitl.ac.in?subject=Faculty%20Recruitment%20Query">contact@iiitl.ac.in</a>
+                    </dd>
+                </dl>
+                <ul class="icons" style="font-size: small;">
+                    <li><a href="https://www.linkedin.com/school/iiitl/" target="#4"
+                            class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
+                    <li><a href="https://twitter.com/iiitlucknow" target="#5" class="icon brands fa-twitter alt"><span
+                                class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/iiitlucknow/" target="#6"
+                            class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+                    <!--	<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>	-->
+                </ul>
+            </section>
+<!-- <p class="copyright">© Copyright 2021 - <a href="http://127.0.0.1:5500/" >Data Analytics Research Lab </a>, IIIT Lucknow.<a href="https://iiitl.ac.in" target="###">IIIT Lucknow</a> All Rights Reserved.</p> -->
+<p class="copyright">© Copyright 2021 - <a href="https://iiitl-dev.github.io/ResearchGroup/" target="blank" style="font-weight:500;" >Data Analytics Research Lab</a>, <a href="https://iiitl.ac.in" target="blank" style="font-weight:500;" >IIIT Lucknow</a> All Rights Reserved.</p>
+</footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'assets/js/jquery.min.js'%}"></script>
+    <script src="{% static 'assets/js/jquery.scrollex.min.js'%}"></script>
+    <script src="{% static 'assets/js/jquery.scrolly.min.js'%}"></script>
+    <script src="{% static 'assets/js/browser.min.js' %}"></script>
+    <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/util.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+    <script>
+        Date.prototype.toDateInputValue = (function () {
+            var local = new Date(this);
+            local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+            return local.toJSON().slice(0, 10);
+        });
+
+        $(document).ready(function () {
+            $('#signDate').val(new Date().toDateInputValue());
+        });
+    </script>
+
+    <script>
+        $.notify("Either Username or Password is incorrect", "error");
+    </script>
+    {% if abc == 0 %}
+        <script>
+            var tries = document.querySelector('#chances').value;
+            tries = `${parseInt(tries) + 1}`;
+            $('#chances').val(tries);
+            console.log(tries);
+        </script>
+    {% endif %}
+    <script>
+        $('#front').val(parseInt($('#chances').val()) - 1);
+    </script>
+
+</body>
+</html>
